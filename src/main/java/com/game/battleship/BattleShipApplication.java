@@ -146,7 +146,7 @@ public class BattleShipApplication {
 	 * @return
 	 * @throws BattleShipException
 	 */
-	private ShipType initializeShipType(String battleShipType) throws BattleShipException {
+	public ShipType initializeShipType(String battleShipType) throws BattleShipException {
 		// Validate ship type
 		validateBattleShipType(battleShipType);
 
@@ -167,7 +167,7 @@ public class BattleShipApplication {
 	 * @return
 	 * @throws BattleShipException
 	 */
-	private Position initializeShipPosition(String battleshipLocation, Integer length, Integer height)
+	public Position initializeShipPosition(String battleshipLocation, Integer length, Integer height)
 			throws BattleShipException {
 		Position location = getPosition(battleshipLocation);
 

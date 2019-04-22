@@ -40,27 +40,11 @@ public class Game implements Observer {
 	public void play() throws BattleShipException {
 		while (!(playerAttacking.isMissilesCompleted() && playerAttacked.isMissilesCompleted())) {
 
-			if (playerAttacking.isMissilesCompleted()) {
-				System.out.println(playerAttacking.getName() + " " + BattleMessage.NO_MISSILE.getMessage());
-				this.togglePlayers();
-			} else {
-				Missile missile = playerAttacking.getMissile();
-				ShipStatus shipStatus = this.attack(missile);
-				if (shipStatus == ShipStatus.HIT) {
-					System.out.println(playerAttacking.getName() + " " + BattleMessage.MISSILE_FIRE.getMessage() + " "
-							+ getIntegerToCharacter(missile.getPosition().getCoordinateY())
-							+ missile.getPosition().getCoordinateX() + " " + BattleMessage.HIT_MSG.getMessage());
-				} else {
-					System.out.println(playerAttacking.getName() + " " + BattleMessage.MISSILE_FIRE.getMessage() + " "
-							+ getIntegerToCharacter(missile.getPosition().getCoordinateY())
-							+ missile.getPosition().getCoordinateX() + " " + BattleMessage.MISS_MSG.getMessage());
-				}
-
-				if (this.validateGameCompleteStatus()) {
-					break;
-				}
-
-				this.togglePlayers(shipStatus);
+			
+			String message = executeAndPlay();
+			System.out.println(message);
+			if (this.validateGameCompleteStatus()) {
+				break;
 			}
 
 		}
@@ -70,6 +54,33 @@ public class Game implements Observer {
 		} else {
 			System.out.println(BattleMessage.DRAW.getMessage());
 		}
+
+	}
+	
+	private String executeAndPlay() throws BattleShipException {
+		StringBuilder message = new StringBuilder();
+		if (playerAttacking.isMissilesCompleted()) {
+			message.append(playerAttacking.getName()).append(" ");
+			message.append(BattleMessage.NO_MISSILE.getMessage());
+			this.togglePlayers();
+		} else {
+			Missile missile = playerAttacking.getMissile();
+			ShipStatus shipStatus = this.attack(missile);
+
+			message.append(playerAttacking.getName()).append(" ");
+			message.append(BattleMessage.MISSILE_FIRE.getMessage()).append(" ");
+			message.append(getIntegerToCharacter(missile.getPosition().getCoordinateY()))
+					.append(missile.getPosition().getCoordinateX()).append(" ");
+			if (shipStatus == ShipStatus.HIT) {
+
+				message.append(BattleMessage.HIT_MSG.getMessage());
+			} else {
+				message.append(BattleMessage.MISS_MSG.getMessage());
+			}
+
+			this.togglePlayers(shipStatus);
+		}
+		return message.toString();
 
 	}
 
