@@ -34,7 +34,7 @@ public class Board extends Subject implements Observer {
 		this.initializeBoard(length, height);
 	}
 
-	public void initializeBoard(Integer length, Integer height) {
+	private void initializeBoard(Integer length, Integer height) {
 		for (int i = 1; i <= length; i++) {
 			for (int j = 1; j <= height; j++) {
 				Position position = new Position(i, j);

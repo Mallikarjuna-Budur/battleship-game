@@ -65,7 +65,7 @@ public class ShipTest {
 	}
 	
 	@Test
-	public void validatePositionAndAttackedShipStatusTest() {
+	public void validatePositionAndAttackedShipStatusTwoHitTest() {
 		Ship ship = new Ship(1, 1, ShipType.DEFENCE_Q);
 		Position position = new Position(1, 1);
 		Set<Position> shipPositions = new HashSet<>();
@@ -83,5 +83,21 @@ public class ShipTest {
 		
 		
 		assertEquals(ShipStatus.DESTROYED, ship.getShipStatus());
+	}
+	
+	@Test
+	public void validatePositionAndAttackedShipStatusOneHitTest() {
+		Ship ship = new Ship(1, 1, ShipType.DEFENCE_Q);
+		Position position = new Position(1, 1);
+		Set<Position> shipPositions = new HashSet<>();
+		shipPositions.add(position);
+		ship.setPositionOccupiedByShip(shipPositions);
+		
+		Position positionOut = new Position(1, 1);
+		Missile missile1 = new Missile(positionOut, MissileType.DEFAULT);
+		
+		assertTrue(ship.validatePositionAndAttacked(missile1));		
+		
+		assertEquals(ShipStatus.HIT, ship.getShipStatus());
 	}
 }
