@@ -21,16 +21,8 @@ public class Position {
 		return coordinateX;
 	}
 
-	public void setCoordinateX(Integer coordinateX) {
-		this.coordinateX = coordinateX;
-	}
-
 	public Integer getCoordinateY() {
 		return coordinateY;
-	}
-
-	public void setCoordinateY(Integer coordinateY) {
-		this.coordinateY = coordinateY;
 	}
 
 	@Override
