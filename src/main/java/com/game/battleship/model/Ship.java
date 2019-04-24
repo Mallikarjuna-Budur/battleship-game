@@ -35,7 +35,7 @@ public class Ship extends Subject{
 		this.shipStatus = ShipStatus.LIVE;
 		this.totalShipCells = this.shipLength * this.shipHeigh;
 		this.shipPositionsStrength = new HashMap<>(this.totalShipCells);
-		this.positionsDestroyed = new HashSet<>(this.shipLength * this.shipHeigh);
+		this.positionsDestroyed = new HashSet<>(this.totalShipCells);
 	}
 
 	/**
